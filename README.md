@@ -1,0 +1,2 @@
+# Termux-script
+termux
