@@ -3045,7 +3045,7 @@ at,
 as,
 })
 
-local av=af("Enter Key","key",nil,"Input",function(av)
+local av=af("输入密匙","key",nil,"Input",function(av)
 an=av
 end)
 
@@ -3149,7 +3149,7 @@ PaddingBottom=UDim.new(0,16),
 
 
 
-local az=ae("Exit","log-out",function()
+local az=ae("退出脚本","log-out",function()
 al:Close()()
 end,"Tertiary",ax.Frame)
 
@@ -3390,7 +3390,7 @@ task.wait(0.4)
 ai(true)
 end
 
-local aA=ae("Submit","arrow-right",function()
+local aA=ae("进入脚本","arrow-right",function()
 local aA=tostring(an or"empty")local aB=
 ag.Folder or ag.Title
 
@@ -12470,7 +12470,7 @@ Icons=a.load'ac',
 
 local aq=ak("TextBox",{
 Text="",
-PlaceholderText="Search...",
+PlaceholderText="搜索...",
 ThemeTag={
 PlaceholderColor3="Placeholder",
 TextColor3="Text",
@@ -13696,10 +13696,10 @@ TextColor3="WindowTopbarTitle",
 
 -- ========== 新增：标题文字渐变容器 ==========
 local titleGradient = Instance.new("UIGradient")
--- 渐变双色，可自行修改RGB/十六进制
+-- 黑白渐变：纯黑 → 纯白
 titleGradient.Color = ColorSequence.new({
-    ColorSequenceKeypoint.new(0, Color3.fromHex("#40c9ff")),
-    ColorSequenceKeypoint.new(1, Color3.fromHex("#ff2eb6"))
+    ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),
+    ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))
 })
 titleGradient.Rotation = 0
 titleGradient.Parent = x
@@ -13710,11 +13710,12 @@ x.TextColor3 = Color3.new(1, 1, 1)
 task.spawn(function()
     local rs = game:GetService("RunService")
     rs.RenderStepped:Connect(function(dt)
-        titleGradient.Rotation += dt * 30 -- 数字越大流动越快
-        titleGradient.Offset = Vector2.new(tick() * 0.15, 0)
+        titleGradient.Rotation += dt * 80 -- 速度加快，原30改为80
+        titleGradient.Offset = Vector2.new(tick() * 0.45, 0) -- 流光偏移同步提速
     end)
 end)
 -- ==========================================
+
 
 aw.UIElements.Main=ao("Frame",{
 Size=UDim2.new(aw.Size.X.Scale,aw.Size.X.Offset,0,0),
