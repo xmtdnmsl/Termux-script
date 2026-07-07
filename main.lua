@@ -13694,46 +13694,6 @@ TextColor3="WindowTopbarTitle",
 },
 })
 
--- ========== 新增：标题文字渐变容器 ==========
--- 先清空原有残留渐变防止冲突
-local oldGrad = x:FindFirstChild("TitleFlowGrad")
-if oldGrad then old:Destroy() end
-
-local titleGradient = Instance.new("UIGradient")
-titleGradient.Name = "TitleFlowGrad"
--- 严格纯黑<->纯白，无杂色
-titleGradient.Color = ColorSequence.new({
-    ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),
-    ColorSequenceKeypoint.new(1, Color3.new(1, 1))
-})
-titleGradient.Rotation = 0
-titleGradient.Parent = x -- 作为文字子元素
-
--- 文字纯白打底
-x.TextColor3 = Color3.new(1, 1, 1)
-
--- 缩放铺满整个文字区域，保证渐变全覆盖
-local gradScale = Instance.new("UIScale")
-grad.Scale = UDim2.new(3,0,3,0)
-grad.Parent = titleGradient
-
--- 高速流光循环，参数不变：旋转80、偏移0.45
-task.spawn(function()
-    local rs = game:GetService("RunService")
-    local conn
-    conn = rs.RenderStepped:Connect(function(dt)
-        -- 黑白旋转
-        titleGradient.Rotation += dt * 80
-        -- 横向快速流动
-        titleGradient.Offset = Vector2.new(tick() * 0.45, 0)
-        -- 防止脚本销毁后报错
-        if not x:IsDescendant(game) then
-            conn:Disconnect()
-        end
-    end)
-end)
--- ==========================================
-
 aw.UIElements.Main=ao("Frame",{
 Size=UDim2.new(aw.Size.X.Scale,aw.Size.X.Offset,0,0),
 Position=aw.Position,
